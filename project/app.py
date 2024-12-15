@@ -23,15 +23,21 @@ def createPage(page, title=None, icon=None, url_path=None, default=False):
         return st.Page(error, title=f"Error ({page})", icon=":material/error:", url_path=f"error-{url_path}")
 
 
-home = createPage(page="View/Home.py", title="Home", icon=":material/home:", url_path="singup2")
+home = createPage(page="View/Home.py", title="Home", icon=":material/home:", url_path="home")
 singup = createPage(page="View/SignUp.py", title="Sign Up", icon=":material/account_circle:", url_path="singup")
 database = createPage(page="View/Database.py", title="Database", icon=":material/account_circle:", url_path="database")
 
+# Define logic here
+
+pages = [home, database]
+position = "sidebar"
+
+if not ("userId" in st.session_state):
+
+    pages = [home, singup]
+    # position = "hidden"
+
 # Define your routes here
-pg = st.navigation(pages=[
-    home,
-    singup,
-    database
-])
+pg = st.navigation(pages=pages, position=position)
 
 pg.run()
